@@ -1,6 +1,9 @@
 # Given the following array:
 nested_animals = [[:dog, :cat, :zebra], [:quokka, :unicorn, :bear]]
 
+#completed in pry
+
+
 # Use an enumerable to:
 # 1. Return an unnested (single layer) array of animals as strings
 

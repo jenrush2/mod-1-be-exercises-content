@@ -1,3 +1,5 @@
+require 'pry'
+
 characters = [
     {
         "name": "Luke Skywalker",
@@ -216,12 +218,25 @@ characters = [
 
 # ["Tatooine", "Naboo", "Alderaan" ... ]
 
+homeworlds = characters.map{|character_hash| character_hash[:homeworld]}.uniq            
+p homeworlds
+
+
 
 # Challenge #2
 
 # Get a list of the characters who have starships
 
 # ["Luke Skywalker", "Darth Vader", "Biggs Darklighter" ... ]
+
+characters_w_starships = characters.reduce([]) do |array, hash|
+                            if hash[:starships] != []
+                               array << hash[:name]
+                            else
+                               array
+                            end
+                        end
+p characters_w_starships
 
 
 
@@ -239,6 +254,13 @@ characters = [
 #     ...
 # }
 
+collect_startships = characters.reduce({}) do |new_hash, character_hash|
+    new_hash[character_hash[:name]] = character_hash[:starships]
+    new_hash
+end
+
+p collect_startships
+
 
 # Challenge #4 
 
@@ -251,3 +273,21 @@ characters = [
 #      ...
 #      ...
 # }
+
+film_list = characters.map{|character_hash| character_hash[:films]}.flatten.uniq
+
+film_list_hash = film_list.reduce({}) do |hash, film|
+    hash[film] = []
+    hash
+end
+
+characters.each do |character_hash|
+    character_hash[:films].each do |film|
+        film_list_hash[film].push character_hash[:name]
+        film_list_hash
+    end
+    film_list_hash
+end
+
+p film_list_hash
+
