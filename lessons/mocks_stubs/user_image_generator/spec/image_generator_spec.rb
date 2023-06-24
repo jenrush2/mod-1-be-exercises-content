@@ -15,5 +15,23 @@ RSpec.describe ImageGenerator do
 
     # Using stubs write the tests to confirm the functionality
     # that exists in ./lib/image_generator.rb
+    #generate images and change max size
+
+    xit 'can generate images' do
+      image_generator = ImageGenerator.new(5)
+      p image_generator.generate_images
+
+
+    end
+
+    it 'can change max size' do
+      image_generator = ImageGenerator.new(5)
+
+      image_generator.change_max_size(2)
+
+      p image_generator.max_image_size
+
+    end
+
   end
 end
