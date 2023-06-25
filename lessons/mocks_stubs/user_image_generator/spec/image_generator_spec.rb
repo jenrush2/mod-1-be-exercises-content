@@ -17,19 +17,26 @@ RSpec.describe ImageGenerator do
     # that exists in ./lib/image_generator.rb
     #generate images and change max size
 
-    xit 'can generate images' do
+    it 'can generate images' do
       image_generator = ImageGenerator.new(5)
-      p image_generator.generate_images
+      allow(image_generator).to receive(:rand).and_return(1)
+      
+      expect(image_generator.generate_images).to eq(["image0"])
 
 
     end
 
     it 'can change max size' do
-      image_generator = ImageGenerator.new(5)
+      image_generator = ImageGenerator.new(100)
+
+      expect(image_generator.max_image_size).to eq(100)
+
+      allow(image_generator).to receive(:rand).and_return(1)
 
       image_generator.change_max_size(2)
 
-      p image_generator.max_image_size
+      expect(image_generator.max_image_size).to eq(2)
+
 
     end
 
