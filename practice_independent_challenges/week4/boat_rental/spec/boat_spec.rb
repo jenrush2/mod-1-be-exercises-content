@@ -27,4 +27,20 @@ RSpec.describe Boat do
         expect(kayak.hours_rented).to eq 3
     end
 
+    it 'can check if boat is rented' do
+        kayak = Boat.new(:kayak, 20)
+
+        expect(kayak.rented?).to eq false
+
+        kayak.rent
+
+        expect(kayak.rented?).to eq true
+
+        kayak.return
+
+        expect(kayak.rented?).to eq false
+
+        
+    end
+
 end
