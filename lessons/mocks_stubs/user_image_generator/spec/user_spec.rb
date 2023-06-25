@@ -4,7 +4,7 @@ require './lib/user'
 
 RSpec.describe User do
   describe '#initialize' do
-    xit 'exists' do
+    it 'exists' do
       # I pass a real image generator object - this is potentially slow and costly
       # Lets mock this object whenever possible
       image = ImageGenerator.new(20)
@@ -12,7 +12,7 @@ RSpec.describe User do
       expect(user).to be_a User
     end
 
-    xit 'has attributes' do
+    it 'has attributes' do
       #I don't need an actual ImageGenerator object. I use a mock instead.
       mock_image_generator = instance_double("Image", max_image_size: 45)
       user = User.new("t@gmail.com", mock_image_generator)
@@ -24,7 +24,8 @@ RSpec.describe User do
       expect(user.image_history).to eq []
       #Why is above code returning undefined method when it has attr_reader?
       #had to add in a method...I thought the point of attr_reader was to not
-      #have to do that?
+      #have to do that? Why does a different instance variable not need
+      #a method defined in the image_generator_spec file?
 
     end
 
@@ -44,12 +45,12 @@ RSpec.describe User do
       user = User.new("t@gmail.com", mock_image_generator)
       mock_image_generator_1 = instance_double("Image", max_image_size: 10)
 
-      #see screenshot in ask Daniel. expected and go look the same -- why fail?
+      #see screenshot in ask Daniel. expected and got look the same -- why fail?
       #Also, if I change it to use a stub so it will pass, why bother?
       expect(user.add_image_generators(mock_image_generator_1)).to eq([user.image_generator])
     end
 
-    xit 'can create images' do
+    it 'can create images' do
       mock_image_generator = instance_double("Image", max_image_size: 45)
       user = User.new("t@gmail.com", mock_image_generator)
 
@@ -58,7 +59,7 @@ RSpec.describe User do
       expect(user.create_images).to eq("image3")
     end
 
-    it 'can assign new random image' do
+    xit 'can assign new random image' do
       mock_image_generator = instance_double("Image", max_image_size: 45)
       user = User.new("t@gmail.com", mock_image_generator)
 
