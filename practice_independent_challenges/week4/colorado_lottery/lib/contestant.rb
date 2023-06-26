@@ -18,4 +18,13 @@ class Contestant
     def full_name
         "#{first_name} #{last_name}"
     end
+
+    def out_of_state?
+        if state_of_residence == 'CO'
+            false
+        else
+            true
+        end
+    end
+
 end
