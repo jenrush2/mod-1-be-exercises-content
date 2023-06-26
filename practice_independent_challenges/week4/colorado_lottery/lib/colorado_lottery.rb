@@ -32,4 +32,18 @@ class ColoradoLottery
         contestant
     end
 
+    def eligible_contestants(given_game)
+        array = []
+        @registered_contestants.each do |contestant, game|
+            if game == given_game and contestant.spending_money > game.cost
+                array << contestant
+                array
+            else
+                array
+            end
+            array
+        end
+        array
+    end
+
 end
