@@ -13,4 +13,13 @@ class ColoradoLottery
             false
         end
     end
+
+    def can_register?(contestant, game)
+        if interested_and_18?(contestant, game) == true and (contestant.out_of_state? == false || game.national_drawing? == true) == true
+            true
+        else
+            false
+        end
+    end
+
 end
