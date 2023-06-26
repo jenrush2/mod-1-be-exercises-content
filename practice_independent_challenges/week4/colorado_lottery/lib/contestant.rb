@@ -14,4 +14,8 @@ class Contestant
         @state_of_residence = args[:state_of_residence]
         @spending_money = args[:spending_money]
     end
+
+    def full_name
+        "#{first_name} #{last_name}"
+    end
 end
