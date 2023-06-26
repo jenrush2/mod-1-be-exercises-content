@@ -47,4 +47,14 @@ RSpec.describe Contestant do
         expect(alexander.out_of_state?).to eq false
     end
 
+    it 'can give game interests' do
+        alexander = Contestant.new({first_name: 'Alexander',
+                                      last_name: 'Aigiades',
+                                      age: 28,
+                                      state_of_residence: 'CO',
+                                      spending_money: 10})
+        
+        expect(alexander.game_interests).to eq ([])
+    end
+
 end

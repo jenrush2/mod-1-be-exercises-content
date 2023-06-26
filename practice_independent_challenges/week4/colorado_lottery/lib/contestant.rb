@@ -6,6 +6,7 @@ class Contestant
                 :age,
                 :state_of_residence,
                 :spending_money
+                :game_interests
 
     def initialize(args)
         @first_name = args[:first_name]
@@ -13,6 +14,7 @@ class Contestant
         @age = args[:age]
         @state_of_residence = args[:state_of_residence]
         @spending_money = args[:spending_money]
+        @game_interests = []
     end
 
     def full_name
@@ -25,6 +27,10 @@ class Contestant
         else
             true
         end
+    end
+
+    def game_interests
+        @game_interests
     end
 
 end
