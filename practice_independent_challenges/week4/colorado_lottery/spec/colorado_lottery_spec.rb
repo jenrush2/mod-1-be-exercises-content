@@ -9,4 +9,14 @@ RSpec.describe ColoradoLottery do
 
         expect(lottery).to be_an_instance_of ColoradoLottery
     end
+
+    it 'has attributes that start empty' do
+        lottery = ColoradoLottery.new
+
+        expect(lottery.registered_contestants).to eq({})
+        expect(lottery.winners).to eq([])
+        expect(lottery.current_contestants).to eq({})
+    end
+
+
 end
