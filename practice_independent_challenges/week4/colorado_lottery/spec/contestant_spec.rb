@@ -9,5 +9,7 @@ RSpec.describe Contestant do
                                       age: 28,
                                       state_of_residence: 'CO',
                                       spending_money: 10})
+
+        expect(alexander).to be_an_instance_of Contestant
     end
 end
