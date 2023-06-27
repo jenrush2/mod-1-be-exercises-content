@@ -37,4 +37,9 @@ class Contestant
         @game_interests << game
     end
 
+    def update_spending_money(amount)
+        @spending_money += amount
+        @spending_money
+    end
+
 end
