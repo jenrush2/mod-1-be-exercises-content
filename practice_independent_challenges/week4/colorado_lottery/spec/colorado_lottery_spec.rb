@@ -217,6 +217,27 @@ RSpec.describe ColoradoLottery do
                         age: 18,
                         state_of_residence: 'CO',
                         spending_money: 5})
+        
+        grace = Contestant.new({
+                        first_name: 'Grace',
+                        last_name: 'Hopper',
+                        age: 20,
+                        state_of_residence: 'CO',
+                        spending_money: 11})
+
+        joan = Contestant.new({
+                        first_name: 'Joan',
+                        last_name: 'Jett',
+                        age: 19,
+                        state_of_residence: 'CO',
+                        spending_money: 80})
+
+        oscar = Contestant.new({
+                        first_name: 'Oscar',
+                        last_name: 'Grouch',
+                        age: 19,
+                        state_of_residence: 'CO',
+                        spending_money: 25})
 
         alexander.add_game_interest('Pick 4')
 
@@ -232,17 +253,28 @@ RSpec.describe ColoradoLottery do
 
         winston.add_game_interest('Pick 4')
 
-        lottery.register_contestant(alexander, pick_4)
+        grace.add_game_interest('Pick 4')
+
+        oscar.add_game_interest('Pick 4')
+
+        joan.add_game_interest('Cash 5')
+
+        lottery.register_contestant(alexander, mega_millions)
         lottery.register_contestant(frederick, mega_millions)
         lottery.register_contestant(benjamin, mega_millions) #won't be registered
         lottery.register_contestant(winston, mega_millions) #has exact amount, not more than, so not eligible contestant
-        lottery.register_contestant(winston, pick_4) #has exact amount, not more than, so not eligible contestant
-
-
-        expect(lottery.eligible_contestants(pick_4)).to eq([alexander, winston])
-        expect(lottery.eligible_contestants(mega_millions)).to eq([frederick])
+        lottery.register_contestant(winston, cash_5)
+        lottery.register_contestant(grace, pick_4)
+        lottery.register_contestant(oscar, pick_4)
+        lottery.register_contestant(joan, cash_5)
+         
+        expect(lottery.eligible_contestants(cash_5)).to eq([winston, joan])
+        expect(lottery.eligible_contestants(pick_4)).to eq([grace, oscar])
+        expect(lottery.eligible_contestants(mega_millions)).to eq([alexander, frederick])
 
     end
+
+    
 
 
 end

@@ -25,15 +25,17 @@ class ColoradoLottery
     def register_contestant(contestant, game)
         if can_register?(contestant, game) == true
             @registered_contestants[contestant] = game
-            contestant
         else
-            contestant
+            @registered_contestants
         end
-        contestant
+        @registered_contestants
     end
 
     def eligible_contestants(given_game)
         array = []
+        @registered_contestants.each do |contestant, game|
+            p "#{contestant.first_name} is registered for #{game.name}"
+        end
         @registered_contestants.each do |contestant, game|
             if game == given_game and contestant.spending_money > game.cost
                 array << contestant
@@ -45,5 +47,7 @@ class ColoradoLottery
         end
         array
     end
+
+
 
 end
