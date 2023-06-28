@@ -33,10 +33,6 @@ class ColoradoLottery
 
     def eligible_contestants(given_game)
         array = []
-        # use below for debugging
-        # @registered_contestants.each do |contestant, game|
-        #     p "#{contestant.first_name} is registered for #{game.name}"
-        # end
         @registered_contestants.each do |contestant, game|
             if game == given_game and contestant.spending_money > game.cost
                 array << contestant
@@ -53,7 +49,6 @@ class ColoradoLottery
         @registered_contestants.each do |contestant, game|
             if contestant.spending_money > game.cost
                 contestant.update_spending_money(-game.cost)
-                p @current_contestants
                 if @current_contestants == {} or @current_contestants.keys.include?(game) == false
                     @current_contestants[game] = [contestant]
                     @current_contestants
@@ -65,6 +60,18 @@ class ColoradoLottery
             end
         end
     end
+
+    def draw_winners
+        @current_contestants.each do |game, contestants|
+            @winners << {contestants.sample.full_name => game.name}
+            @winners
+        end
+        
+        return date
+    end
+
+
+
                 
 
 

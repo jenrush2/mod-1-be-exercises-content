@@ -361,6 +361,189 @@ RSpec.describe ColoradoLottery do
         expect(lottery.current_contestants).to eq({mega_millions => [alexander, frederick], cash_5 => [winston, joan], pick_4 => [grace, oscar]})
     end
 
+    it 'can draw winners' do
+        lottery = ColoradoLottery.new
+        pick_4 = Game.new('Pick 4', 2)
+        mega_millions = Game.new('Mega Millions', 5, true)
+        cash_5 = Game.new('Cash 5', 1)
+
+        alexander = Contestant.new({
+                       first_name: 'Alexander',
+                       last_name: 'Aigades',
+                       age: 28,
+                       state_of_residence: 'CO',
+                       spending_money: 10})
+        
+        benjamin = Contestant.new({
+                        first_name: 'Benjamin',
+                        last_name: 'Franklin',
+                        age: 17,
+                        state_of_residence: 'PA',
+                        spending_money: 100})
+
+        frederick = Contestant.new({
+                        first_name:  'Frederick',
+                        last_name: 'Douglass',
+                        age: 55,
+                        state_of_residence: 'NY',
+                        spending_money: 20})
+
+        winston = Contestant.new({
+                        first_name: 'Winston',
+                        last_name: 'Churchill',
+                        age: 18,
+                        state_of_residence: 'CO',
+                        spending_money: 5})
+        
+        grace = Contestant.new({
+                        first_name: 'Grace',
+                        last_name: 'Hopper',
+                        age: 20,
+                        state_of_residence: 'CO',
+                        spending_money: 11})
+
+        joan = Contestant.new({
+                        first_name: 'Joan',
+                        last_name: 'Jett',
+                        age: 19,
+                        state_of_residence: 'CO',
+                        spending_money: 80})
+
+        oscar = Contestant.new({
+                        first_name: 'Oscar',
+                        last_name: 'Grouch',
+                        age: 19,
+                        state_of_residence: 'CO',
+                        spending_money: 25})
+
+        alexander.add_game_interest('Pick 4')
+
+        alexander.add_game_interest('Mega Millions')
+        
+        frederick.add_game_interest('Mega Millions')
+        
+        winston.add_game_interest('Cash 5')
+        
+        winston.add_game_interest('Mega Millions')
+        
+        benjamin.add_game_interest('Mega Millions')
+
+        winston.add_game_interest('Pick 4')
+
+        grace.add_game_interest('Pick 4')
+
+        oscar.add_game_interest('Pick 4')
+
+        joan.add_game_interest('Cash 5')
+
+        lottery.register_contestant(alexander, mega_millions)
+        lottery.register_contestant(frederick, mega_millions)
+        lottery.register_contestant(winston, cash_5)
+        lottery.register_contestant(grace, pick_4)
+        lottery.register_contestant(oscar, pick_4)
+        lottery.register_contestant(joan, cash_5)
+
+        lottery.charge_all_eligible
+        allow(lottery).to receive(:date).and_return('5/18/23')
+
+        expect(lottery.draw_winners).to eq ('5/18/23')
+        
+        expect(lottery.winners).to be_an_instance_of Array
+        lottery.winners.each do |winner_hash|
+            expect(winner_hash.keys[0]).to be_an_instance_of String
+            expect(winner_hash.values[0]).to be_an_instance_of String
+        end
+
+        expect(lottery.winners.length).to eq(lottery.current_contestants.keys.length)
+        
+    end
+
+    it 'can announce winners' do
+        lottery = ColoradoLottery.new
+        pick_4 = Game.new('Pick 4', 2)
+        mega_millions = Game.new('Mega Millions', 5, true)
+        cash_5 = Game.new('Cash 5', 1)
+
+        alexander = Contestant.new({
+                       first_name: 'Alexander',
+                       last_name: 'Aigades',
+                       age: 28,
+                       state_of_residence: 'CO',
+                       spending_money: 10})
+        
+        benjamin = Contestant.new({
+                        first_name: 'Benjamin',
+                        last_name: 'Franklin',
+                        age: 17,
+                        state_of_residence: 'PA',
+                        spending_money: 100})
+
+        frederick = Contestant.new({
+                        first_name:  'Frederick',
+                        last_name: 'Douglass',
+                        age: 55,
+                        state_of_residence: 'NY',
+                        spending_money: 20})
+
+        winston = Contestant.new({
+                        first_name: 'Winston',
+                        last_name: 'Churchill',
+                        age: 18,
+                        state_of_residence: 'CO',
+                        spending_money: 5})
+        
+        grace = Contestant.new({
+                        first_name: 'Grace',
+                        last_name: 'Hopper',
+                        age: 20,
+                        state_of_residence: 'CO',
+                        spending_money: 11})
+
+        joan = Contestant.new({
+                        first_name: 'Joan',
+                        last_name: 'Jett',
+                        age: 19,
+                        state_of_residence: 'CO',
+                        spending_money: 80})
+
+        oscar = Contestant.new({
+                        first_name: 'Oscar',
+                        last_name: 'Grouch',
+                        age: 19,
+                        state_of_residence: 'CO',
+                        spending_money: 25})
+
+        alexander.add_game_interest('Pick 4')
+
+        alexander.add_game_interest('Mega Millions')
+        
+        frederick.add_game_interest('Mega Millions')
+        
+        winston.add_game_interest('Cash 5')
+        
+        winston.add_game_interest('Mega Millions')
+        
+        benjamin.add_game_interest('Mega Millions')
+
+        winston.add_game_interest('Pick 4')
+
+        grace.add_game_interest('Pick 4')
+
+        oscar.add_game_interest('Pick 4')
+
+        joan.add_game_interest('Cash 5')
+
+        lottery.register_contestant(alexander, mega_millions)
+        lottery.register_contestant(frederick, mega_millions)
+        lottery.register_contestant(winston, cash_5)
+        lottery.register_contestant(grace, pick_4)
+        lottery.register_contestant(oscar, pick_4)
+        lottery.register_contestant(joan, cash_5)
+
+        lottery.charge_all_eligible
+        allow(lottery).to receive(:date).and_return('5/18/23')
+
+        #test announce_winner method -- need to stub the return value of winners
 
 
 end
