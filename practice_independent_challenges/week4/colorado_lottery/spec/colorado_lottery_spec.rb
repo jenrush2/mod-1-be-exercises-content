@@ -543,7 +543,12 @@ RSpec.describe ColoradoLottery do
         lottery.charge_all_eligible
         allow(lottery).to receive(:date).and_return('5/18/23')
 
-        #test announce_winner method -- need to stub the return value of winners
+        allow(lottery).to receive(:winners).and_return([{"Frederick Douglass" => "Mega Millions"}, {"Winston Churchill" => "Cash 5"}, {"Grace Hopper" => "Pick 4"}])
+        
+
+        expect(lottery.announce_winner).to eq("The winner of Mega Millions is Frederick Douglass! The winner of Cash 5 is Winston Churchill! The winner of Pick 4 is Grace Hopper! ")
+
+    end
 
 
 end

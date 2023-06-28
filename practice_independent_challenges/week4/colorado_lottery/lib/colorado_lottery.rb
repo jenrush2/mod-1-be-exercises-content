@@ -70,6 +70,15 @@ class ColoradoLottery
         return date
     end
 
+    def announce_winner
+        print_string = ""
+        winners.each do |winner_hash|
+            print_string.concat("The winner of #{winner_hash.values[0]} is #{winner_hash.keys[0]}! ")
+            print_string
+        end
+        print_string
+    end
+
 
 
                 
