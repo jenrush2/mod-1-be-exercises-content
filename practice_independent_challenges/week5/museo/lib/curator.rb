@@ -32,5 +32,41 @@ class Curator
         list
     end
 
+    def artist_with_multiple_photographs
+        artists.reduce([]) do |list, artist|
+            if list_all[artist].length > 1
+                list << artist.name
+                list
+            else
+                list
+            end
+            list
+        end
+    end
+
+    def country_list(country_of_interest)
+        photographs.reduce([]) do |list, photograph|
+            artists_id_if_match = artists.reduce([]) do |new_array, artist|
+                if artist.country == country_of_interest
+                    new_array << artist.id
+                    new_array
+                else
+                    new_array
+                end 
+                new_array
+            end   
+
+            if artists_id_if_match.include?(photograph.artist_id) == true  
+                list << photograph
+                list
+            else
+                list
+            end
+            list
+        end
+    end
+
+    
+
 
 end
