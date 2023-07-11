@@ -1,4 +1,4 @@
-require './photograph.rb'
+require './lib/photograph.rb'
 
 class Artist
     attr_reader :id, :name, :born, :died, :country

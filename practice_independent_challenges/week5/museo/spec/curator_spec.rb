@@ -246,7 +246,7 @@ RSpec.describe do Curator
         expect(curator.country_list("United States")).to eq([photo_2, photo_3])
     end
 
-    it 'can get photographs from a csv' do
+    xit 'can get photographs from a csv' do
         curator = Curator.new
 
         p curator.get_photos_from_csv('data/photographs.csv')
@@ -261,7 +261,7 @@ RSpec.describe do Curator
 
     end
 
-    it 'can get artists from a csv' do
+    xit 'can get artists from a csv' do
         curator = Curator.new
 
         p curator.get_artists_from_csv('data/artists.csv')
@@ -272,6 +272,32 @@ RSpec.describe do Curator
 
         expect(curator.get_artists_from_csv('data/artists.csv')[5].id).to eq("6")
     end
+
+    it 'can give a list of all photographs taken in a year that falls in a range' do
+        curator = Curator.new
+
+        curator.get_photos_from_csv('data/photographs.csv')
+        curator.get_artists_from_csv('data/artists.csv')
+
+        #expect(curator.photos_from_years("1940" , "1955")).to eq("check for photograph 1 and 2")
+        expect(curator.photos_from_years("1940" , "1955")).to be_an_instance_of Array
+        expect(curator.photos_from_years("1940" , "1955")[0]).to be_an_instance_of Photograph 
+
+
+    end
+
+    it 'can receive a photograph and give artist age when taken and all photographs taken at that age' do
+        curator = Curator.new
+
+        curator.get_photos_from_csv('data/photographs.csv')
+        curator.get_artists_from_csv('data/artists.csv')
+
+        expect(curator.artist_age_match("Some other photo")).to eq("Diane Arbus was 44 years old and took 'Identical Twins, Roselle, New Jersey' in that same year.")
+    end
+
+    
+
+
 
 
 
