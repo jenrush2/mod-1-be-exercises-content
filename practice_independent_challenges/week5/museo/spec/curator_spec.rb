@@ -1,6 +1,7 @@
 require './lib/photograph.rb'
 require './lib/artist.rb'
 require './lib/curator.rb'
+require 'CSV'
 
 RSpec.describe do Curator 
     it 'exists' do
@@ -245,6 +246,32 @@ RSpec.describe do Curator
         expect(curator.country_list("United States")).to eq([photo_2, photo_3])
     end
 
+    it 'can get photographs from a csv' do
+        curator = Curator.new
+
+        p curator.get_photos_from_csv('data/photographs.csv')
+        p curator.photographs
+
+        expect(curator.get_photos_from_csv('data/photographs.csv')).to be_an_instance_of Array
+        expect(curator.get_photos_from_csv('data/photographs.csv')[0]).to be_an_instance_of Photograph 
+        expect(curator.photographs).to be_an_instance_of Array
+        expect(curator.photographs[1]).to be_an_instance_of Photograph
+
+        expect(curator.photographs[4].name).to eq("Some cool photo")
+
+    end
+
+    it 'can get artists from a csv' do
+        curator = Curator.new
+
+        p curator.get_artists_from_csv('data/artists.csv')
+        p curator.artists
+
+        expect(curator.get_artists_from_csv('data/artists.csv')).to be_an_instance_of Array
+        expect(curator.get_artists_from_csv('data/artists.csv')[0]).to be_an_instance_of Artist
+
+        expect(curator.get_artists_from_csv('data/artists.csv')[5].id).to eq("6")
+    end
 
 
 

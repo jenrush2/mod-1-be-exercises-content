@@ -1,5 +1,6 @@
 require './photograph.rb'
 require './artist.rb'
+require 'CSV'
 
 class Curator
     attr_accessor :photographs, :artists
@@ -66,7 +67,22 @@ class Curator
         end
     end
 
-    
+    def get_photos_from_csv(csv_path)
+        CSV.foreach(csv_path, :header_converters => :symbol, headers: true) do |row|
+            photographs << Photograph.new(Hash[row.headers.zip(row.fields)])
+            photographs
+        end
+        photographs
+    end
+
+    def get_artists_from_csv(csv_path)
+        CSV.foreach(csv_path, :header_converters => :symbol, headers: true) do |row|
+            artists << Artist.new(Hash[row.headers.zip(row.fields)])
+            artists
+        end
+        artists
+    end
+
 
 
 end
